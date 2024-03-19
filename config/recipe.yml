@@ -4,7 +4,7 @@ name: cirrus-os
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/kinoite-main
+base-image: ghcr.io/ublue-os/bazzite
 image-version: 39 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -19,14 +19,31 @@ modules:
 
   - type: rpm-ostree
     repos: # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
+      - https://download.docker.com/linux/fedora/docker-ce.repo
+      - https://copr.fedorainfracloud.org/coprs/birkch/Koi/repo/fedora-%OS_VERSION%/birkch-Koi-fedora-%OS_VERSION%.repo # Koi is needed for 
+      - https://pkgs.tailscale.com/stable/fedora/tailscale.repo
     install:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+      - fastfetch
+      - fish
+      - gnome-boxes
+      - code
+      - Koi
+      - lightly
+      - solaar
+      - zerotier-one
+      - tailscale
       # - micro
       # - starship
     remove:
       # example: removing firefox (in favor of the flatpak)
       # "firefox" is the main package, "firefox-langpacks" is a dependency
-      # - firefox
-      # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+      - firefox
+      - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
@@ -36,7 +53,7 @@ modules:
       # repo-name: flathub
       # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
-        # - org.mozilla.firefox
+        - org.mozilla.firefox
         # - org.gnome.Loupe
         # - one.ablaze.floorp//lightning # This is an example of flatpak which has multiple branches in selection (flatpak//branch).
         # Flatpak runtimes are not supported (like org.winehq.Wine//stable-23.08),
@@ -45,5 +62,28 @@ modules:
       # Installing different branches of the same Flatpak is not supported.
       remove:
         # - org.gnome.eog
+  - type: bling
+    install:
+      - ublue-update # https://github.com/ublue-os/ublue-update
+      - 1password # install 1Password (stable) and `op` CLI tool
+      # - dconf-update-service # a service unit that updates the dconf db on boot
+      # - gnome-vrr # enables gnome-vrr for your image
+      # - laptop # installs TLP and configures your system for laptop usage
+      # - flatpaksync # allows synchronization of user-installed flatpaks, see separate documentation section
+
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - FiraCode # don't add "Nerd Font" suffix.
+        - CascadiaCode
+        - Hack
+        - SourceCodePro
+        - Terminus
+        - JetBrainsMono
+        - NerdFontsSymbolsOnly
+      google-fonts:
+        - Roboto
+        - Open Sans
+
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
