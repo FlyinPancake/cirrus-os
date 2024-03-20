@@ -42,8 +42,6 @@ modules:
       - solaar
       - zerotier-one
       - tailscale
-      - 1password
-      - 1password-cli
       # - micro
       # - starship
     remove:
@@ -51,8 +49,7 @@ modules:
       # "firefox" is the main package, "firefox-langpacks" is a dependency
       # - firefox
       # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-    optfix:
-      - /opt/1Password
+    
   - type: script
     scripts:
       - 1password_post.sh

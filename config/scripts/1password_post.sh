@@ -7,6 +7,8 @@ set -oue pipefail
 
 # From https://github.com/blue-build/modules/blob/main/modules/bling/installers/1password.sh
 
+rpm-ostree install 1password 1password-cli
+
 # And then we do the hacky dance!
 mv /var/opt/1Password /usr/lib/1Password # move this over here
 
