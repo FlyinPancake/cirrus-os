@@ -18,6 +18,9 @@ modules:
           # in /usr/etc/ in the image. read more in files module reference.
       - etc: /etc
           # Copy yum repos to /etc
+  - type: script
+    snippets:
+      - "rpm --import https://downloads.1password.com/linux/keys/1password.asc"
 
   - type: rpm-ostree
     repos: # - https://copr.fedorainfracloud.org/coprs/atim/starship/repo/fedora-%OS_VERSION%/atim-starship-fedora-%OS_VERSION%.repo
@@ -39,6 +42,8 @@ modules:
       - solaar
       - zerotier-one
       - tailscale
+      - 1password
+      - 1password-cli
       # - micro
       # - starship
     remove:
@@ -46,6 +51,8 @@ modules:
       # "firefox" is the main package, "firefox-langpacks" is a dependency
       # - firefox
       # - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+    usrfix:
+      - /opt/1Password
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
@@ -67,7 +74,7 @@ modules:
   - type: bling
     install:
       # - ublue-update # https://github.com/ublue-os/ublue-update
-      - 1password # install 1Password (stable) and `op` CLI tool
+      # - 1password # install 1Password (stable) and `op` CLI tool
       # - dconf-update-service # a service unit that updates the dconf db on boot
       # - gnome-vrr # enables gnome-vrr for your image
       # - laptop # installs TLP and configures your system for laptop usage
