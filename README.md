@@ -1,8 +1,33 @@
 # cirrus-os
 
+> Cirrus clouds are often a sign of fair weather, but they can also indicate that a change in weather is on the horizon.
+
+## Goals
+
+The goal of this build is building off of [Bazzite](https://github.com/ublue-os/bazzite) and mix in some of the features of [Bluefin DX](https://github.com/ublue-os/bluefin) to create a **modern** gaming and productivity powerhouse.
+
+## Changes from Bazzite
+
+### Fully implemented
+- Docker engine from Docker repos
+- Koi (until Plasma 6 comes) - Automatic theme switching
+- Gnome-boxes and virt-manager - Virtual Machines
+- lightly desktop theme (probably to be removed?)
+- solaar for logitech devices
+- zerotier and tailscale for connectivity
+- 1Password
+- A bunch of nerd fonts 🤓
+
+### Wip
+- `fastfetch` instead of `neofetch`
+
+### Planned
+- `clevis` - for unlocking encrypted partitions with TPM
+
+## Built with BlueBuild
+
 See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
 
-After setup, it is recommended you update this README to describe your custom image.
 
 ## Installation
 
