@@ -36,6 +36,7 @@ modules:
       - fastfetch
       - fish
       - gnome-boxes
+      - virt-manager
       - code
       - Koi
       - lightly
